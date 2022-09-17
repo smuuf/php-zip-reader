@@ -1,0 +1,32 @@
+name: PHP tests
+
+on: [push]
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    strategy:
+          matrix:
+            php-versions: ['8.0', '8.1', 'latest']
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        coverage: none
+    - name: Install
+      run: |
+        composer install --optimize-autoloader
+        chmod +x ./bin/*
+    - name: Disable xdebug
+      run: sudo phpdismod xdebug
+    - name: Run tests
+      run: chmod +x ./bin/* && ./bin/test --php phpdbg --coverage html
+    - name: Storing PHP ${{ matrix.php-versions }} Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: php${{ matrix.php-versions }}-coverage
+        path: ./coverage.html
+    - name: Run static analysis
+      run: ./bin/phpstan # || true # Ignore phpstan error exit code.

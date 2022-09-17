@@ -1,0 +1,7 @@
+.vscode/**
+
+/vendor/
+
+coverage.*
+/tests/**/output/*.actual
+/tests/**/output/*.expected

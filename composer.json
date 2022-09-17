@@ -1,0 +1,26 @@
+{
+	"name": "smuuf/zip-reader",
+	"description": "A simple-to-use library for browsing and reading Zip files with friendly API.",
+	"type": "library",
+	"require": {
+		"php": "^8.0",
+		"ext-zip": "*",
+		"smuuf/strict-object": "^1.0"
+	},
+	"require-dev": {
+		"nette/tester": "^2",
+		"phpstan/phpstan": "^1.8"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Premysl Karbula",
+			"email": "premavansmuuf+composer@gmail.com"
+		}
+	],
+	"autoload":{
+		"psr-4": {
+			"Smuuf\\ZipReader\\": "src/"
+		}
+	}
+}
